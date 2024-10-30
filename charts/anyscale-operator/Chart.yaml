@@ -1,0 +1,3 @@
+apiVersion: v2
+name: anyscale-operator
+version: 0.0.2
