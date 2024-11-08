@@ -13,7 +13,7 @@ anyscaleCliToken: ""
 region: ""
 
 # operatorImage specifies the Docker image to use for the Anyscale Operator.
-operatorImage: "public.ecr.aws/v0b8w7e3/anyscale/kubernetes_manager:ci-814eca3cf04ed479199e330b38b02ba28157a499"
+operatorImage: "public.ecr.aws/v0b8w7e3/anyscale/kubernetes_manager:ci-d54aebdebfa24d54a36fe87ba9bd055924a7a0f2"
 
 # operatorIamIdentity specifies the IAM identity from the cloud provider to bind to the Anyscale Operator.
 # This is only supported on AWS/GCP. For AWS, this should be the ARN of the IAM role. For GCP, this should be the email of the
@@ -74,7 +74,14 @@ supportedAccelerators:
     T4: "Tesla-T4"
     A10G: "NVIDIA-A10G"
   gcp:
+    V100: "nvidia-tesla-v100"
+    P100: "nvidia-tesla-p100"
+    T4: "nvidia-tesla-t4"
     L4: "nvidia-l4"
+    A100-40G: "nvidia-tesla-a100"
+    A100-80G: "nvidia-a100-80gb"
+    H100: "nvidia-h100-80gb"
+    H100-MEGA: "nvidia-h100-mega-80gb"
 
 # If set to true, then the "topology.kubernetes.io/zone" nodeSelector will be applied
 # to all Anyscale workloads with a request to run in a specific zone specified through
