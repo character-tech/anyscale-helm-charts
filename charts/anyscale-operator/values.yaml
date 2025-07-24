@@ -9,6 +9,35 @@ cloudProvider: ""
 # If not set, the Anyscale Operator will attempt to bootstrap using a native cloud provider identity (only supported on AWS/GCP).
 anyscaleCliToken: ""
 
+# External secrets configuration for retrieving secrets from external secret management systems.
+# This allows creating multiple ExternalSecret resources for different credential types.
+externalSecrets:
+  # Anyscale CLI token secret configuration
+  - name: "anyscale-cli-token"
+    enabled: false
+    # ClusterSecretStore name for external secret store access
+    clusterSecretStore: ""
+    # Refresh interval for the external secret
+    refreshInterval: "1h"
+    # Secret key mappings from external store to Kubernetes secret
+    secretKeys:
+      - remoteKey: ""  # The key in the external secret store
+        secretKey: "ANYSCALE_CLI_TOKEN"  # The key name in the created Kubernetes secret
+  
+  # AWS credentials secret configuration for object storage access
+  - name: "aws-credentials"
+    enabled: false
+    # ClusterSecretStore name for external secret store access
+    clusterSecretStore: ""
+    # Refresh interval for the external secret
+    refreshInterval: "1h"
+    # Secret key mappings from external store to Kubernetes secret
+    secretKeys:
+      - remoteKey: ""  # The key in the external secret store for AWS_ACCESS_KEY_ID
+        secretKey: "AWS_ACCESS_KEY_ID"
+      - remoteKey: ""  # The key in the external secret store for AWS_SECRET_ACCESS_KEY
+        secretKey: "AWS_SECRET_ACCESS_KEY"
+
 # region specifies the region that the Kubernetes cluster is running in.
 region: ""
 
