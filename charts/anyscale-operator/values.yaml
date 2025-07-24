@@ -56,6 +56,8 @@ operatorNodeSelection:
   nodeSelector: {}
   # affinity allows for more complex node selection rules
   affinity: {}
+  # tolerations allow the operator pod to schedule on nodes with matching taints
+  tolerations: []
 
 # defaultInstanceTypes provides a list of default Pod shapes that can be
 # used in Anyscale workloads (abstracted as virtual "instance types").
