@@ -50,7 +50,7 @@ spec:
         - --cloud-deployment-id={{ required "cloudDeploymentId is required" .Values.cloudDeploymentId }}
         - --control-plane-url={{ .Values.controlPlaneURL | default "https://console.anyscale.com" }}
         - --cloud-provider={{ .Values.cloudProvider }}
-        {{ if not .Values.anyscaleCliToken }}
+        {{- if not (or .Values.anyscaleCliToken (include "anyscale.externalSecretEnabled" .)) }}
         - --region={{ required "region is required for operator registration if anyscaleCliToken is not provided & cloud-native bootstrap scheme is used; must be set to the cloud provider region of this Kubernetes cluster" .Values.region }}
         {{ end }}
         - --patch-config-path=/tmp/config/patches.yaml
@@ -80,7 +80,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-{{if .Values.anyscaleCliToken}}
+{{if or .Values.anyscaleCliToken (include "anyscale.externalSecretEnabled" .)}}
         - name: ANYSCALE_CLI_TOKEN
           valueFrom:
             secretKeyRef:
