@@ -87,6 +87,26 @@ spec:
               name: anyscale-cli-token
               key: ANYSCALE_CLI_TOKEN
 {{end}}
+{{- $awsCredentialsSecret := "" }}
+{{- range .Values.externalSecrets }}
+{{- if eq .name "aws-credentials" }}
+{{- if .enabled }}
+{{- $awsCredentialsSecret = .name }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- if $awsCredentialsSecret }}
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: {{ $awsCredentialsSecret }}
+              key: AWS_ACCESS_KEY_ID
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ $awsCredentialsSecret }}
+              key: AWS_SECRET_ACCESS_KEY
+{{- end }}
         volumeMounts:
           - name: logs
             mountPath: /tmp/anyscale/logs/
