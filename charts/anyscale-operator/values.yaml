@@ -249,5 +249,5 @@ gatewayHostname: ""
 # rayPriorityClass controls the creation and configuration of a PriorityClass
 # for Anyscale Ray head and worker pods
 rayPriorityClass:
-  enabled: true
+  enabled: false
   priority: 1100
