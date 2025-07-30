@@ -245,3 +245,9 @@ gatewayIp: ""
 # gatewayHostname specifies the hostname of the gateway.
 # This is used for routing traffic through the gateway.
 gatewayHostname: ""
+
+# rayPriorityClass controls the creation and configuration of a PriorityClass
+# for Anyscale Ray head and worker pods
+rayPriorityClass:
+  enabled: true
+  priority: 1100

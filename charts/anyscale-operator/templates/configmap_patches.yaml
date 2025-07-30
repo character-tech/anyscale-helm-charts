@@ -223,6 +223,18 @@ data:
           value: {{ .Values.ingressAddress }}
     {{- end }}
 
+    {{- if .Values.rayPriorityClass.enabled }}
+    ########################################
+    # Ray Priority Class
+    ########################################
+    - kind: Pod
+      selector: "anyscale.com/ray-node-type in (head, worker)"
+      patch:
+        - op: add
+          path: /spec/priorityClassName
+          value: anyscale-ray
+    {{- end }}
+
     ########################################
     # Additional Patches
     ########################################
