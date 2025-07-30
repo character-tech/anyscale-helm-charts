@@ -1,0 +1,15 @@
+{{- if .Values.rayPriorityClass.enabled }}
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: anyscale-ray
+  labels:
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+value: {{ .Values.rayPriorityClass.priority }}
+preemptionPolicy: PreemptLowerPriority
+globalDefault: false
+description: "Priority class for Anyscale Ray head and worker pods"
+{{- end }}
