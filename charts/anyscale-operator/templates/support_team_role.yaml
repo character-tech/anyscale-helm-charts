@@ -1,0 +1,17 @@
+{{- if .Values.supportTeam.enabled }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ .Release.Name }}-support-namespace-access
+  labels:
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/component: support-team
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+{{- end }}

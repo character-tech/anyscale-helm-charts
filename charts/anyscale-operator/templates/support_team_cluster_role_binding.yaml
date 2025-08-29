@@ -1,0 +1,26 @@
+{{- if .Values.supportTeam.enabled }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  # Since this is a global resource, we append the namespace to it to support
+  # launching multiple cloud deployments into a single Kubernetes cluster (we
+  # assume that clouds to not share namespaces).
+  name: anyscale-support-cluster-access-{{ .Release.Namespace }}
+  labels:
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/component: support-team
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  # Since this is a global resource, we append the namespace to it to support
+  # launching multiple cloud deployments into a single Kubernetes cluster (we
+  # assume that clouds to not share namespaces).
+  name: anyscale-support-cluster-access-{{ .Release.Namespace }}
+subjects:
+- kind: ServiceAccount
+  name: {{ .Values.supportTeam.serviceAccountName }}
+  namespace: {{ .Release.Namespace }}
+{{- end }}

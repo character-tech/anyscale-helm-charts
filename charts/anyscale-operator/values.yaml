@@ -251,3 +251,10 @@ gatewayHostname: ""
 rayPriorityClass:
   enabled: false
   priority: 1100
+
+# supportTeam controls the creation of RBAC resources for Anyscale support team access
+supportTeam:
+  # enabled controls whether to create the support team ServiceAccount and RBAC resources
+  enabled: false
+  # serviceAccountName specifies the name of the ServiceAccount for support team access
+  serviceAccountName: "anyscale-support"
