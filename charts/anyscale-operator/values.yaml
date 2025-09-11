@@ -251,3 +251,27 @@ gatewayHostname: ""
 rayPriorityClass:
   enabled: false
   priority: 1100
+
+# externalLoadBalancer controls the creation of an external LoadBalancer service for direct ingress access
+externalLoadBalancer:
+  # enabled controls whether to create the external LoadBalancer service
+  enabled: false
+  # serviceName specifies the name of the LoadBalancer service
+  serviceName: "anyscale-external-lb"
+  # ingressNamespace specifies the namespace where the target ingress controller is running
+  ingressNamespace: "ingress-nginx"
+  # ingressSelector specifies the selector to target ingress controller pods
+  # These should be configured to match your specific ingress controller
+  ingressSelector:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+  # ports specifies the ports to expose on the LoadBalancer
+  ports:
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: https
+  # annotations specifies additional annotations for the LoadBalancer service
+  # Configure these based on your cloud provider requirements
+  annotations: {}

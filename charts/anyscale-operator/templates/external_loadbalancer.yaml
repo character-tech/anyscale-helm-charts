@@ -1,0 +1,29 @@
+{{- if .Values.externalLoadBalancer.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.externalLoadBalancer.serviceName }}
+  namespace: {{ .Values.externalLoadBalancer.ingressNamespace }}
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: external-loadbalancer
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  annotations:
+    {{- range $key, $value := .Values.externalLoadBalancer.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+spec:
+  type: LoadBalancer
+  selector:
+    {{- range $key, $value := .Values.externalLoadBalancer.ingressSelector }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
+  ports:
+    {{- range .Values.externalLoadBalancer.ports }}
+    - name: {{ .name }}
+      port: {{ .port }}
+      protocol: {{ .protocol }}
+      targetPort: {{ .targetPort }}
+    {{- end }}
+{{- end }}
