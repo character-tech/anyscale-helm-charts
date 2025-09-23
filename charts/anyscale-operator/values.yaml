@@ -42,7 +42,7 @@ externalSecrets:
 region: ""
 
 # operatorImage specifies the Docker image to use for the Anyscale Operator.
-operatorImage: "public.ecr.aws/v0b8w7e3/anyscale/kubernetes_manager:ci-bbdd5c6b3eb955e144f0a15f6f5366a30d2a8012"
+operatorImage: "us-docker.pkg.dev/anyscale-artifacts/public/kubernetes_manager:ci-530d36609690ec9ea8a30ea7532d47dfeb9d3241"
 
 # operatorIamIdentity specifies the IAM identity from the cloud provider to bind to the Anyscale Operator.
 # This is only supported on AWS/GCP. For AWS, this should be the ARN of the IAM role. For GCP, this should be the email of the
