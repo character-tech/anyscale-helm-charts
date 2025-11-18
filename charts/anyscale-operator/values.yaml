@@ -275,3 +275,8 @@ externalLoadBalancer:
   # annotations specifies additional annotations for the LoadBalancer service
   # Configure these based on your cloud provider requirements
   annotations: {}
+  # loadBalancerSourceRanges specifies the CIDR blocks that are allowed to access the LoadBalancer
+  # If not set, the LoadBalancer will be accessible from all sources
+  # Example: ["0.0.0.0/0"] allows access from anywhere
+  # Example: ["10.0.0.0/8", "172.16.0.0/12"] restricts access to specific networks
+  loadBalancerSourceRanges: []

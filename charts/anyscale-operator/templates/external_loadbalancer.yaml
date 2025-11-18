@@ -15,6 +15,12 @@ metadata:
     {{- end }}
 spec:
   type: LoadBalancer
+  {{- if .Values.externalLoadBalancer.loadBalancerSourceRanges }}
+  loadBalancerSourceRanges:
+    {{- range .Values.externalLoadBalancer.loadBalancerSourceRanges }}
+    - {{ . | quote }}
+    {{- end }}
+  {{- end }}
   selector:
     {{- range $key, $value := .Values.externalLoadBalancer.ingressSelector }}
     {{ $key }}: {{ $value }}
