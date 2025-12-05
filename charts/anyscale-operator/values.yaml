@@ -5,6 +5,12 @@ cloudDeploymentId: ""
 # Supported values are "aws" and "gcp".
 cloudProvider: ""
 
+# webhook configuration for the validating webhook
+webhook:
+  # timeoutSeconds specifies the timeout for the validating webhook in seconds.
+  # Must be between 1 and 30 seconds. Default is 30.
+  timeoutSeconds: 30
+
 # An Anyscale CLI Token. If set, the Anyscale Operator will use this token to authenticate with the Anyscale control plane.
 # If not set, the Anyscale Operator will attempt to bootstrap using a native cloud provider identity (only supported on AWS/GCP).
 anyscaleCliToken: ""
