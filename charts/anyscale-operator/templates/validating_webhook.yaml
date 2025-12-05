@@ -18,7 +18,7 @@ webhooks:
   clientConfig:
     url: {{or .Values.controlPlaneURL "https://console.anyscale.com"}}/api/v2/kubernetes_manager/admission/{{ .Values.cloudDeploymentId }}
   sideEffects: None
-  timeoutSeconds: 30
+  timeoutSeconds: {{ .Values.webhook.timeoutSeconds }}
   # We are starting with hard-failing here; this can be changed to soft-failing if issues arise (e.g. control plane availability).
   failurePolicy: Fail
   namespaceSelector:
